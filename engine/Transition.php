@@ -5,14 +5,27 @@ namespace app\engine;
 class Transition
 {
     private $name;
+    private $target;
     private $title;
-    private $flags;
+    private $callback;
 
-    public function __construct(string $name, string $title, array $flags)
+    public function __construct(string $name, string $title, $target)
     {
-        $this->name  = $name;
+        $this->name = $name;
         $this->title = $title;
-        $this->flags = $flags;
+
+        if (is_string($target)) {
+            $this->target  = $target;
+        } elseif ($target instanceof \Closure) {
+            $this->callback = $target;
+        } else {
+            throw new \InvalidArgumentException('Target should be either new state name or callable.');
+        }
+    }
+
+    public function getTarget(): string
+    {
+        return $this->target;
     }
 
     public function getName(): string
@@ -25,8 +38,8 @@ class Transition
         return $this->title;
     }
 
-    public function getFlags(): array
+    public function getCallback(): ?callable
     {
-        return $this->flags;
+        return $this->callback;
     }
 }

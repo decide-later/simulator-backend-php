@@ -1,0 +1,10 @@
+POST http://decide-later.test/api/state
+Content-Type: application/json
+
+{
+  "to": "border_go"
+}
+
+
+###
+
