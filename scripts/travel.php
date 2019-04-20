@@ -1,8 +1,11 @@
 <?php
 
 use app\engine\Flags;
+use app\engine\Html;
 use app\engine\Script;
 use app\engine\State;
+
+$html = new Html(__DIR__ . '/travel');
 
 class States {
     public const START = 'start';
@@ -15,7 +18,7 @@ class States {
 }
 
 $script = new Script('travel', [
-    States::START => State::content('Вы хотите в путешествие. Куда поедем?')
+    States::START => State::content($html->get('start'))
         ->transition('too_dangeous', 'В Дамаск', States::TOO_DANGEROUS)
         ->transition('visa_munich', 'В Мюнхен', States::VISA),
 
@@ -46,7 +49,7 @@ $script = new Script('travel', [
 
     States::LATE => State::content('Вы опозлали на самолёт.')
         ->transition('try_again', 'Попробуй ещё раз', States::AIRPORT),
-    States::VISA_FAIL => State::content('Вас не пустили. Мюнхен в ЕС, нужно было делать визу.')
+    States::VISA_FAIL => State::content($html->get('visa_fail'))
         ->transition('try_again', 'Попробуй ещё раз', States::VISA),
     States::FLY => State::content('Полетели!')
         ->transition('restart', 'Ещё раз?', States::START)
