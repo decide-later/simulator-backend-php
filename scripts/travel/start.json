@@ -1,0 +1,15 @@
+{
+  "type": "start",
+  "transitions": [
+    {
+      "name": "where_damascus",
+      "title": "В Дамаск"
+    },
+    {
+      "name": "where_munich",
+      "title": "В Мюнхен"
+    }
+  ],
+  "content": "Вы хотите в путешествие. Куда поедем?",
+  "fields": []
+}
