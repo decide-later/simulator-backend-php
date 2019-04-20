@@ -1,8 +1,6 @@
 <?php
 
-
 namespace app\engine;
-
 
 class State
 {
